@@ -37,7 +37,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file pkg-config libxdo-dev libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev
 
       - uses: dtolnay/rust-toolchain@stable
 
@@ -63,3 +63,30 @@ jobs:
           name: ${{ matrix.artifact }}
           path: ${{ matrix.path }}
           if-no-files-found: error
+
+  release:
+    name: GitHub Release
+    needs: build
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: BuildMuhely-*
+
+      - name: Release közzététele
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TAG="v0.2.0-tauri-${{ github.run_number }}"
+          TITLE="BuildMűhely 0.2.0 (Tauri) – build ${{ github.run_number }}"
+          NOTES="Tauri 2 asztali héj. Windows: NSIS telepítő (.exe). Linux: AppImage. A csomagok aláírás nélküliek, a rendszer figyelmeztetést jeleníthet meg."
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" artifacts/BuildMuhely-Windows/* artifacts/BuildMuhely-Linux/* --clobber
+          else
+            gh release create "$TAG" artifacts/BuildMuhely-Windows/* artifacts/BuildMuhely-Linux/* --title "$TITLE" --notes "$NOTES" --prerelease
+          fi
