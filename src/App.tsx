@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Loader2, Monitor, Package, Pencil, Play, Plus, Save,
   Settings, Smartphone, Square, Trash2, Upload, X, XCircle,
 } from 'lucide-react';
-import { api } from './api';
+import { api, isDesktop } from './api';
 import type { Artifact, Environment, Health, Job, Project, Target } from './types';
 
 type Page = 'overview' | 'build' | 'artifacts' | 'environment';
@@ -101,6 +101,32 @@ export default function App() {
     } finally {
       setBusy(false);
       if (fileRef.current) fileRef.current.value = '';
+    }
+  }
+
+  async function handleImportDialog() {
+    if (demo) return notify('Előnézeti módban a projektimport le van tiltva.', 'err');
+    setBusy(true);
+    try {
+      const project = await api.importZipDialog();
+      if (!project) return;
+      await loadAll();
+      setSelectedId(project.id);
+      setPage('build');
+      notify('Projekt importálva.');
+    } catch (err) {
+      notify((err as Error).message, 'err');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleDownload(artifact: Artifact) {
+    try {
+      const saved = await api.downloadArtifact(artifact);
+      if (saved) notify(isDesktop ? 'Fájl mentve.' : 'Letöltés elindítva.');
+    } catch (err) {
+      notify((err as Error).message, 'err');
     }
   }
 
@@ -205,6 +231,7 @@ export default function App() {
             </p>
           </div>
           {demo && <span className="badge warn"><AlertTriangle size={14} /> Böngészős előnézet</span>}
+          {!demo && isDesktop && <span className="badge ok"><CheckCircle2 size={14} /> Tauri asztali app</span>}
         </header>
 
         {page === 'overview' && (
@@ -219,8 +246,8 @@ export default function App() {
               <h2>Projektek</h2>
               <div className="row">
                 <button className="btn ghost" onClick={handleSample} disabled={busy || demo}><Plus size={16} /> Mintaprojekt</button>
-                <button className="btn primary" onClick={() => fileRef.current?.click()} disabled={busy || demo}><Upload size={16} /> ZIP importálása</button>
-                <input ref={fileRef} type="file" accept=".zip" hidden onChange={handleImport} />
+                <button className="btn primary" onClick={() => (isDesktop ? handleImportDialog() : fileRef.current?.click())} disabled={busy || demo}><Upload size={16} /> ZIP importálása</button>
+                {!isDesktop && <input ref={fileRef} type="file" accept=".zip" hidden onChange={handleImport} />}
               </div>
             </div>
 
@@ -315,11 +342,14 @@ export default function App() {
                         <strong>{activeJob.projectName}</strong>
                         <StatusBadge status={activeJob.status} />
                       </div>
-                      {activeJob.artifactId && (
-                        <a className="btn primary" href={`/api/artifacts/${activeJob.artifactId}/download`}>
-                          <Download size={16} /> Letöltés
-                        </a>
-                      )}
+                      {activeJob.artifactId && (() => {
+                        const artifact = artifacts.find(a => a.id === activeJob.artifactId);
+                        return artifact ? (
+                          <button className="btn primary" onClick={() => handleDownload(artifact)}>
+                            <Download size={16} /> {isDesktop ? 'Mentés' : 'Letöltés'}
+                          </button>
+                        ) : null;
+                      })()}
                     </div>
                     <div className="log" ref={logRef}>
                       {activeJob.logs.map((l, i) => <div key={i} className="log-line">{l.line}</div>)}
@@ -348,7 +378,7 @@ export default function App() {
                         <td>{a.target === 'windows' ? 'Windows EXE' : 'Android APK'}</td>
                         <td>{formatBytes(a.size)}</td>
                         <td className="muted small">{new Date(a.createdAt).toLocaleString('hu-HU')}</td>
-                        <td><a className="btn ghost" href={`/api/artifacts/${a.id}/download`}><Download size={16} /> Letöltés</a></td>
+                        <td><button className="btn ghost" onClick={() => handleDownload(a)}><Download size={16} /> {isDesktop ? 'Mentés' : 'Letöltés'}</button></td>
                       </tr>
                     ))}
                   </tbody>

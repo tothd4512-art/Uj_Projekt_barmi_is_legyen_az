@@ -62,4 +62,5 @@ export interface Health {
   ok: boolean;
   app: string;
   demoMode: boolean;
+  runtime?: 'tauri' | 'web';
 }

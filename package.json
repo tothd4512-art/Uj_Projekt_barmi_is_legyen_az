@@ -1,19 +1,25 @@
 {
   "name": "build-muhely",
-  "version": "0.1.0",
-  "description": "Grafikus, helyi APK- és EXE-készítő műhely — fiók, várólista és fizetős letöltés nélkül.",
-  "main": "electron/main.cjs",
+  "version": "0.2.0",
+  "description": "Grafikus, helyi APK- és EXE-készítő műhely Tauri héjjal — fiók, várólista és fizetős letöltés nélkül.",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "concurrently -k \"vite\" \"node server/index.mjs\"",
+    "dev": "tauri dev",
+    "dev:web": "concurrently -k \"vite\" \"node server/index.mjs\"",
+    "vite:dev": "vite",
     "build": "tsc -b && vite build",
+    "build:runner": "esbuild scripts/build-runner-entry.mjs --bundle --platform=node --format=esm --outfile=scripts/build-runner.mjs --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\"",
     "start": "node server/index.mjs",
-    "electron:dev": "concurrently -k \"node server/index.mjs\" \"vite\" \"wait-on http://127.0.0.1:5173 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
-    "electron:build": "npm run build && electron-builder",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:build": "tauri build",
     "test": "node --test tests/*.test.mjs",
-    "preview": "vite preview"
+    "test:rust": "cargo test --manifest-path src-tauri/Cargo.toml"
   },
   "dependencies": {
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-dialog": "^2.0.0",
     "adm-zip": "^0.5.16",
     "cross-spawn": "^7.0.6",
     "express": "^4.21.2",
@@ -22,10 +28,7 @@
     "uuid": "^11.0.5"
   },
   "devDependencies": {
-    "@electron/packager": "^18.3.6",
-    "lucide-react": "^0.468.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@tauri-apps/cli": "^2.0.0",
     "@types/adm-zip": "^0.5.7",
     "@types/express": "^4.17.21",
     "@types/multer": "^1.4.12",
@@ -34,36 +37,11 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "concurrently": "^9.1.2",
-    "cross-env": "^7.0.3",
-    "electron": "^33.3.1",
-    "electron-builder": "^25.1.8",
+    "esbuild": "^0.25.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "typescript": "^5.7.3",
-    "vite": "^6.0.7",
-    "wait-on": "^8.0.2"
-  },
-  "build": {
-    "appId": "hu.buildmuhely.app",
-    "productName": "BuildMűhely",
-    "asar": false,
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*",
-      "server/**/*",
-      "samples/**/*",
-      "package.json"
-    ],
-    "win": {
-      "target": [
-        "portable"
-      ]
-    },
-    "linux": {
-      "target": [
-        "AppImage"
-      ]
-    }
+    "vite": "^6.0.7"
   }
 }

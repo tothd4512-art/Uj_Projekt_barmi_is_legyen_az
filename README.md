@@ -2,7 +2,9 @@
 
 Grafikus, helyi alkalmazás webes projektek **Android APK** és **Windows EXE** csomagolására.
 
-Nem parancssoros építőeszköz: a felületen importálod a projektedet, beállítod a nevét/azonosítóját/verzióját, kiválasztod a célt, és követed a valódi fordítási naplót. A kész fájl közvetlenül letölthető.
+A asztali app **Tauri 2** héjat használ: a felület React, az ablakot és a helyi parancsokat Rust kezeli. A buildmotor továbbra is Node.js-alapú, mert az APK/EXE csomagolás npm/Gradle/Electron-builder eszközöket futtat.
+
+Nem parancssoros építőeszköz: a felületen importálod a projektedet, beállítod a nevét/azonosítóját/verzióját, kiválasztod a célt, és követed a valódi fordítási naplót. A kész fájl közvetlenül menthető.
 
 - Nincs fiók.
 - Nincs e-mailes várólista.
@@ -18,23 +20,41 @@ Nem parancssoros építőeszköz: a felületen importálod a projektedet, beáll
 
 Ez az első változat webes forrásból dolgozik. Nem fordít tetszőleges Python, Flutter vagy natív projektet.
 
+## Architektúra
+
+```text
+React felület
+  -> Tauri IPC
+  -> Rust parancsok / projekt- és feladattároló
+  -> Node.js build runner
+  -> Capacitor / Gradle / Electron-builder
+```
+
+A Rust réteg kezeli a projekteket, ZIP-importálást, feladatnaplót, megszakítást és a kész fájlok mentését. A tényleges APK/EXE build egy Node.js runnerben fut, amely ugyanazt a buildmotort használja, mint a böngészős fejlesztői előnézet.
+
 ## Indítás fejlesztőként
+
+Szükséges:
+
+- Node.js 22+
+- Rust stable
+- Tauri előfeltételek az adott platformon
 
 ```bash
 npm install
-npm run electron:dev
+npm run dev
 ```
 
-Csak böngészős felület:
+Csak böngészős felület, helyi API-val:
 
 ```bash
-npm run dev
+npm run dev:web
 ```
 
 Asztali csomag készítése:
 
 ```bash
-npm run electron:build
+npm run tauri:build
 ```
 
 ## Használat
@@ -44,7 +64,7 @@ npm run electron:build
 3. A **Fordítás** oldalon állítsd be a nevet, csomagazonosítót, verziót.
 4. Válaszd ki: **Windows EXE** vagy **Android APK**.
 5. Indítsd a fordítást, és kövesd a naplót.
-6. Elkészült fájlok: **Elkészült fájlok** → **Letöltés**.
+6. Elkészült fájlok: **Elkészült fájlok** → **Mentés**.
 
 ## Követelmények
 
@@ -60,11 +80,17 @@ npm run electron:build
 
 A **Környezet** oldal megmutatja, mi elérhető és mi hiányzik.
 
+## Tauri platformfüggőségek
+
+- Windows: WebView2 Runtime. A csomag szükség esetén letöltheti a bootstrappert.
+- Linux: WebKitGTK 4.1 és GTK fejlesztői csomagok.
+- macOS: WKWebView.
+
 ## Előnézeti mód
 
-Ha a szerver nyilvános címre kötve fut (`HOST=0.0.0.0`), alapból előnézeti módban indul: a projektimport, mentés és fordítás le van tiltva. Ez biztonsági okokból van így, mert a fordítás helyi eszközöket futtat.
+A böngészős fejlesztői szerver nyilvános címre kötve (`HOST=0.0.0.0`) alapból előnézeti módban indul: a projektimport, mentés és fordítás le van tiltva. Ez biztonsági okokból van így, mert a fordítás helyi eszközöket futtat.
 
-Az asztali Electron app nem előnézeti módban fut.
+A Tauri asztali app nem előnézeti módban fut.
 
 ## Biztonság
 

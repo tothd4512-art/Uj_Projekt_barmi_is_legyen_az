@@ -6,3 +6,6 @@ data/
 .env
 .DS_Store
 *.tsbuildinfo
+src-tauri/target/
+src-tauri/gen/schemas/
+scripts/build-runner.mjs

@@ -1,0 +1,18 @@
+[package]
+name = "build-muhely"
+version = "0.2.0"
+description = "Grafikus, helyi APK- és EXE-készítő műhely Tauri héjjal"
+authors = ["BuildMűhely"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
