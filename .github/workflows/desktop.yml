@@ -10,8 +10,6 @@ jobs:
   build:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -65,8 +63,6 @@ jobs:
       - name: Rust tesztek napló
         if: steps.rust_tests.outcome == 'failure'
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           {
             echo "## Rust tesztek – hiba"
@@ -74,13 +70,6 @@ jobs:
             tail -n 200 rust-tests.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          {
-            echo "Rust tesztek hiba a(z) ${{ matrix.name }} feladatban:"
-            echo '```text'
-            tail -n 120 rust-tests.log
-            echo '```'
-          } > rust-comment.md
-          gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/comments" -F body=@rust-comment.md || true
           exit 1
 
       - name: Tauri csomag
