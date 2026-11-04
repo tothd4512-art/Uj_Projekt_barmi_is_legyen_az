@@ -19,7 +19,7 @@ Nem parancssoros építőeszköz: a felületen importálod a projektedet, beáll
 | Cél | Valódi APK/EXE készítés | Bemutató, demó, letöltés, profilok |
 | Hol fut | A felhasználó gépén | Böngészőben, statikus hostingon |
 | Feltöltés | nincs, helyi fájlrendszer | nincs, a demó szimulált |
-| Reklám | **soha** | saját hirdetés + opcionális AdSense |
+| Reklám | **soha** | saját ajánló + opcionális AdSense |
 | Fiók | nem kell | nem kell |
 
 A weboldal nem fordít: a böngészőben nincs Gradle/Electron-builder. A demó megmutatja a folyamatot,
@@ -134,7 +134,7 @@ Mit tartalmaz:
 
 ### Hirdetés
 
-Alapból **saját hirdetés** fut: a saját projektek kártyája, külső hirdetőhálózat és tracker nélkül.
+Alapból **saját ajánló** fut: a saját projektek kártyája, külső hirdetőhálózat és tracker nélkül.
 AdSense csak akkor tölt be, ha a `VITE_ADSENSE_CLIENT` + `VITE_ADSENSE_SLOT_*` változók ki vannak
 töltve **és** a látogató hozzájárult. A részletek: [`web/README.md`](web/README.md).
 

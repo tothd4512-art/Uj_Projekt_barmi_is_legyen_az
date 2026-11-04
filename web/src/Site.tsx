@@ -208,7 +208,7 @@ export default function Site() {
           </p>
           <h2>Hirdetés</h2>
           <p>
-            Az oldalon hirdetés jelenhet meg. Alapértelmezés szerint <strong>saját hirdetés</strong>:
+            Az oldalon ajánló vagy hirdetés jelenhet meg. Alapértelmezés szerint <strong>saját ajánló</strong>:
             a készítő saját projektjeit ajánlja, külső hirdetőhálózat és követőkód nélkül.
             Ha külső hirdetőhálózat (pl. Google AdSense) aktív, az csak a hozzájárulásod után tölt be.
           </p>

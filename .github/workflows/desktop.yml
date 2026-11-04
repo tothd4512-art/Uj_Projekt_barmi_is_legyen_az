@@ -104,9 +104,28 @@ jobs:
         run: |
           TAG="v0.3.0-creaft-${{ github.run_number }}"
           TITLE="Creaft 0.3.0 – build ${{ github.run_number }}"
-          NOTES="Tauri 2 asztali héj. Windows: NSIS telepítő (.exe). Linux: AppImage. A csomagok aláírás nélküliek, a rendszer figyelmeztetést jeleníthet meg."
+          NOTES=$(cat <<'NOTES_EOF'
+          Tauri 2 asztali héj. **Az alkalmazásban nincs reklám.**
+
+          | Csomag | Platform |
+          |---|---|
+          | `Creaft_0.3.0_x64-setup.exe` | Windows 10/11 (NSIS telepítő) |
+          | `Creaft_0.3.0_amd64.AppImage` | Linux (AppImage, `chmod +x` után fut) |
+
+          A valódi fordításhoz a gépeden kell: Node.js (EXE és APK), Java 17+ és Android SDK (APK).
+          A csomagok aláírás nélküliek, ezért a Windows SmartScreen és a macOS/Linux figyelmeztethet — ezt nem kerüljük meg.
+
+          **Fontos:** a BuildMűhelyről átnevezett kiadás új adatmappát használ (`Creaft`), ezért a korábbi
+          projektlista nem jelenik meg automatikusan. A régi fájlok a régi adatmappában maradnak, onnan ZIP-ként újraimportálhatók.
+
+          Weboldal: https://creaft-eight.vercel.app/
+          NOTES_EOF
+          )
+          # Nem prerelease: a /releases/latest link csak igy mutat erre a kiadasra,
+          # kulonben a weboldal Letoltes gombja 404-re vinne.
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" artifacts/Creaft-Windows/* artifacts/Creaft-Linux/* --clobber
+            gh release edit "$TAG" --title "$TITLE" --notes "$NOTES" --prerelease=false --latest
           else
-            gh release create "$TAG" artifacts/Creaft-Windows/* artifacts/Creaft-Linux/* --title "$TITLE" --notes "$NOTES" --prerelease
+            gh release create "$TAG" artifacts/Creaft-Windows/* artifacts/Creaft-Linux/* --title "$TITLE" --notes "$NOTES" --latest
           fi
