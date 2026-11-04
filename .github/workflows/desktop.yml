@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - 'arena/**'
+    paths-ignore:
+      - 'web/**'
+      - 'README.md'
 
 jobs:
   build:

@@ -1,0 +1,51 @@
+name: Weboldal build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'arena/**'
+      - main
+    paths:
+      - 'web/**'
+      - '.github/workflows/web.yml'
+  pull_request:
+    paths:
+      - 'web/**'
+
+jobs:
+  build:
+    name: Creaft web
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+
+      - name: Típusellenőrzés és build
+        run: npm run build
+
+      - name: Méretjelentés
+        run: |
+          {
+            echo "## Creaft web – build kész"
+            echo '```text'
+            du -sh dist
+            find dist -type f -printf '%s\t%p\n' | sort -rn | head -10
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Creaft-Web
+          path: web/dist
+          if-no-files-found: error
