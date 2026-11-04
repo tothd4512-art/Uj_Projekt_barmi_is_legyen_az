@@ -2,11 +2,9 @@ import { ExternalLink } from 'lucide-react';
 import { PROFILES } from '../config';
 
 export default function Profiles() {
-  const visible = PROFILES.filter(p => p.url || p.key === 'producthunt' || p.key === 'kofi' || p.key === 'itchio');
-
   return (
     <div className="profile-grid">
-      {visible.map(p => {
+      {PROFILES.map(p => {
         const active = Boolean(p.url);
         const inner = (
           <>
@@ -18,8 +16,9 @@ export default function Profiles() {
               </div>
             </div>
             <p className="muted small">{p.description}</p>
+            {p.note && <p className="profile-note">{p.note}</p>}
             <span className={`profile-cta ${active ? '' : 'soon'}`}>
-              {p.cta} {active && <ExternalLink size={13} />}
+              {active ? p.cta : 'Hamarosan'} {active && <ExternalLink size={13} />}
             </span>
           </>
         );

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Megaphone, ExternalLink } from 'lucide-react';
-import { ADS, PROFILES, adsenseActive, type AdSlotName, type Consent } from '../config';
+import { ADS, PROFILES, adsenseActive, type AdSlotName, type Consent, type ProfileKey } from '../config';
 
 declare global {
   interface Window {
@@ -72,8 +72,16 @@ export default function AdSlot({
 
   if (!ADS.houseEnabled) return null;
 
-  const house = PROFILES.filter(p => p.url && p.key !== 'github');
-  const pick = house[slot === 'hero' ? 0 : slot === 'inline' ? 0 : house.length - 1] || house[0];
+  // Saját ajánló: slotonként más cél, hogy ne ugyanazt ismételjük háromszor.
+  // A korkapus itch.io-profil helyett mindig a közvetlen terméklapra viszünk.
+  const order: ProfileKey[] = slot === 'hero'
+    ? ['beatius', 'kofi', 'producthunt']
+    : slot === 'inline'
+      ? ['producthunt', 'beatius', 'kofi']
+      : ['kofi', 'producthunt', 'beatius'];
+  const pick = order
+    .map(key => PROFILES.find(p => p.key === key && p.url))
+    .find(Boolean);
   if (!pick) return null;
 
   return (

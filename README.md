@@ -141,6 +141,19 @@ töltve **és** a látogató hozzájárult. A részletek: [`web/README.md`](web/
 A profil linkeket a `web/src/config.ts` fájlban lehet átírni. Amelyiknek üres az `url` mezője,
 az „Hamarosan” kártyaként jelenik meg, nem halott linkként.
 
+**Fontos:** a Product Hunt-, Ko-fi- és itch.io-lap a **BEATIUS** zenelejátszóé, nem a Creafté.
+A szövegek ezt ki is írják, hogy a látogató ne higgye Creaft-launchnak.
+
+| Felület | URL |
+|---|---|
+| BEATIUS letöltés | https://xd-stoodios.itch.io/beatius-maximized |
+| Product Hunt | https://www.producthunt.com/products/beatius |
+| Ko-fi (Maximized) | https://ko-fi.com/s/5599552726 |
+| Ko-fi profil | https://ko-fi.com/rust_surfer |
+| itch.io profil | https://xd-stoodios.itch.io/ (18+-os korkapu) |
+
+Az itch.io-profil korkapuja miatt az ajánlókártyák mindig a közvetlen terméklapra visznek.
+
 ### Deploy Vercelre
 
 A `web/vercel.json` kész: build parancs, kimeneti könyvtár, SPA rewrite és cache fejlécek.

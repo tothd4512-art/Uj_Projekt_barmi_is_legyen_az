@@ -20,7 +20,42 @@ export const REPO = 'https://github.com/tothd4512-art/Uj_Projekt_barmi_is_legyen
 export const RELEASES = `${REPO}/releases`;
 export const LATEST_RELEASE = `${REPO}/releases/latest`;
 
-/** Kitöltendő profilok. Amit üresen hagysz, az nem jelenik meg — nincs halott link. */
+/**
+ * A készítő másik kész terméke. A weboldalon ez a keresztajánlás alanya.
+ *
+ * FIGYELEM: a Product Hunt-, Ko-fi- és itch.io-lap mind a BEATIUS-é, nem a Creafté.
+ * A szövegeknek ezt kell tükrözniük — a Creaftnak még nincs saját launchja.
+ */
+export const BEATIUS = {
+  name: 'BEATIUS Maximized',
+  tagline: 'YouTube-zene, valódi FFT-vel.',
+  description:
+    'Asztali zenelejátszó, ami a YouTube hangját játssza, és közben valós idejű FFT-vel mutatja a zenét. ' +
+    'Keresel, indítod, és a vizualizáció a tényleges hangra reagál — nem egy előre gyártott animáció.',
+  platform: 'Windows 10/11 · telepítés nélkül · 29 MB',
+  features: [
+    'Valós idejű FFT-vizualizáció',
+    '31 sávos EQ',
+    'YouTube-keresés és lejátszás',
+    'Kedvencek',
+    'Offline lejátszás',
+    'Billentyűparancsok',
+  ],
+  note: 'Nincs előfizetés, nincs reklám, nincs követés — ugyanaz az elv, mint a Creaftnál.',
+  links: {
+    /** Elsődleges letöltés: „name your own price”, vagyis 0 Ft is lehet. */
+    download: 'https://xd-stoodios.itch.io/beatius-maximized',
+    producthunt: 'https://www.producthunt.com/products/beatius',
+    /** Konkrét shop-termék: a BEATIUS Maximized lapja. */
+    kofi: 'https://ko-fi.com/s/5599552726',
+    /** Általános támogatás és a többi BEATIUS-változat (PC, Android, iOS). */
+    kofiProfile: 'https://ko-fi.com/rust_surfer',
+    source: 'https://github.com/tothdani182-lgtm/BEATIUS-mobile',
+  },
+  accent: '#a78bfa',
+} as const;
+
+/** Profilok és felületek. Amit üresen hagysz, az „Hamarosan” kártya — nincs halott link. */
 export type ProfileKey = 'beatius' | 'producthunt' | 'kofi' | 'itchio' | 'github';
 
 export interface Profile {
@@ -31,54 +66,60 @@ export interface Profile {
   url: string;
   cta: string;
   accent: string;
+  /** Opcionális figyelmeztetés, amit a kártyán is kiírunk. */
+  note?: string;
 }
 
 export const PROFILES: Profile[] = [
   {
     key: 'beatius',
-    name: 'BEATIUS',
-    label: 'Zenelejátszó',
+    name: 'BEATIUS Maximized',
+    label: 'Zenelejátszó · Windows',
     description:
-      'Svájci bicska a zenéhez: FFT-s ritmusvizualizáció, megújult UI, YouTube-keresés és lejátszás FFT-vel, 31 sávos EQ, kedvencek. Csak a kereséshez kell net, a többi offline megy.',
-    url: 'https://github.com/tothdani182-lgtm/BEATIUS-mobile',
-    cta: 'Megnézem',
-    accent: '#a78bfa',
-  },
-  {
-    key: 'github',
-    name: 'GitHub',
-    label: 'Forráskód',
-    description: 'A Creaft teljes forrása, hibajegyek és a kiadások. Nyíltan, letölthetően.',
-    url: 'https://github.com/tothd4512-art',
-    cta: 'Forráskód',
-    accent: '#38bdf8',
+      'YouTube-zene valós idejű FFT-vizualizációval, 31 sávos EQ-val, kedvencekkel és offline lejátszással. ' +
+      'Telepítés nélkül indul. Az itch.io-n „name your own price”, vagyis ingyen is letölthető.',
+    url: BEATIUS.links.download,
+    cta: 'Letöltés',
+    accent: BEATIUS.accent,
   },
   {
     key: 'producthunt',
     name: 'Product Hunt',
-    label: 'Launch',
-    description: 'Itt tudod támogatni a launchot, hogy több emberhez jusson el a Creaft.',
-    url: '',
-    cta: 'Hamarosan',
+    label: 'BEATIUS launch',
+    description:
+      'A BEATIUS Product Hunt-oldala két launchhal. Itt tudod követni és felfelé szavazni a zenelejátszót.',
+    url: BEATIUS.links.producthunt,
+    cta: 'Megnézem',
     accent: '#fb923c',
   },
   {
     key: 'kofi',
     name: 'Ko-fi',
-    label: 'Támogatás',
-    description: 'Ha hasznos volt, egy kávé segít, hogy tovább fejlesszem. Nem feltétele a letöltésnek.',
-    url: '',
-    cta: 'Hamarosan',
+    label: 'BEATIUS Maximized',
+    description:
+      'A BEATIUS Maximized a Ko-fi shopban. A profilomon a többi változat is ott van: PC, Android és iOS.',
+    url: BEATIUS.links.kofi,
+    cta: 'Megnézem',
     accent: '#f472b6',
   },
   {
     key: 'itchio',
     name: 'itch.io',
-    label: 'Játékok, appok',
-    description: 'Az itch.io profilom, ahol az appok és kísérletek is megjelennek.',
-    url: '',
-    cta: 'Hamarosan',
+    label: 'Xd_Stoodios',
+    description: 'Az itch.io-profilom: a BEATIUS mellett játékok és kisebb kísérletek is.',
+    url: 'https://xd-stoodios.itch.io/',
+    cta: 'Profil',
     accent: '#f87171',
+    note: 'A profil 18+-os korkaput kér a játékok miatt. A BEATIUS fenti linkje közvetlen.',
+  },
+  {
+    key: 'github',
+    name: 'GitHub',
+    label: 'Creaft forráskód',
+    description: 'A Creaft teljes forrása, hibajegyek és a kiadások. Nyíltan, letölthetően.',
+    url: 'https://github.com/tothd4512-art',
+    cta: 'Forráskód',
+    accent: '#38bdf8',
   },
 ];
 

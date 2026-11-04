@@ -37,8 +37,18 @@ Az asztali Creaft app **nem tartalmazza** ezt a csomagot, ott nincs és nem is l
 
 ## Profilok szerkesztése
 
-Minden link a `web/src/config.ts` fájlban van (`PROFILES`). Amelyiknek üres az `url` mezője,
-az „Hamarosan” kártyaként jelenik meg, nem halott linkként.
+Minden link a `web/src/config.ts` fájlban van (`PROFILES` és `BEATIUS.links`). Amelyiknek üres az
+`url` mezője, az „Hamarosan” kártyaként jelenik meg, nem halott linkként.
+
+A `BEATIUS` objektum írja le a készítő másik appját; a `BeatiusSpotlight` komponens ezt jeleníti meg
+a landing oldalon és az Alkotások oldalon is. Ez saját projekt, nem hirdetés: nincs „Hirdetés” címke,
+és nem tölt be külső szkriptet.
+
+A három külső felület (Product Hunt, Ko-fi, itch.io) a **BEATIUS**-é, nem a Creafté — a kártyaszövegek
+ezt explicitté teszik. Ha később lesz Creaft-launch, a `PROFILES`-ban külön kártyát kell neki adni.
+
+Az `AdSlot` slotonként más saját ajánlót mutat (hero → BEATIUS, inline → Product Hunt, footer → Ko-fi),
+és szándékosan nem ajánlja a 18+-os korkapu mögötti itch.io-profilgyökeret.
 
 ## Deploy
 

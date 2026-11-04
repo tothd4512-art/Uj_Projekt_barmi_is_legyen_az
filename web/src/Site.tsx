@@ -7,6 +7,7 @@ import AdSlot from './components/AdSlot';
 import ConsentBar from './components/ConsentBar';
 import Demo from './components/Demo';
 import Profiles from './components/Profiles';
+import BeatiusSpotlight from './components/BeatiusSpotlight';
 import { BRAND, LATEST_RELEASE, REPO, RELEASES, readConsent, writeConsent, type Consent } from './config';
 
 type Route = 'home' | 'profiles' | 'privacy';
@@ -142,6 +143,7 @@ export default function Site() {
               <a className="btn ghost" href="#/profilok">Összes <ArrowRight size={15} /></a>
             </div>
             <p className="muted">Ugyanaz a kéz készíti a Creaftot és a BEATIUS zenelejátszót is.</p>
+            <BeatiusSpotlight />
             <Profiles />
           </section>
 
@@ -165,7 +167,9 @@ export default function Site() {
                 jogos, és nem kerüljük meg.
               </Faq>
               <Faq q="Mibe kerül?">
-                A letöltés és a használat ingyenes. A támogatás önkéntes, és nem nyit fel semmilyen funkciót.
+                A Creaft letöltése és használata ingyenes, a forráskód is nyílt. A támogatás önkéntes,
+                és nem nyit fel semmilyen funkciót. A fenti Ko-fi- és itch.io-linkek a másik appomhoz,
+                a BEATIUS-hoz vezetnek.
               </Faq>
             </div>
           </section>
@@ -190,7 +194,11 @@ export default function Site() {
       {route === 'profiles' && (
         <main className="container section">
           <h1>Alkotások és profilok</h1>
-          <p className="muted">A Creaft mellett ezek a saját projektek és felületek. Ahol még nincs link, ott hamarosan lesz.</p>
+          <p className="muted">
+            A Creaft mellett ezek a saját projektek és felületek. A Product Hunt-, Ko-fi- és itch.io-lap
+            a BEATIUS zenelejátszóé — a Creaftnak még nincs külön launchja.
+          </p>
+          <BeatiusSpotlight />
           <Profiles />
           <div className="spacer" />
           <AdSlot slot="inline" consent={consent} variant="card" />
