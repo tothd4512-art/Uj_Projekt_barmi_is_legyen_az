@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Egyetlen URL, szándékosan.
+
+  Az oldal hash-alapú útválasztást használ (#/profilok, #/adatvedelem).
+  A keresők a hash utáni részt nem tekintik külön lapnak, ezért azokat
+  felsorolni itt félrevezető lenne — a Google úgyis csak a gyökeret indexeli.
+  Ha később valódi útvonalak lesznek (/profilok), ide fel kell venni őket.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://creaft-eight.vercel.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

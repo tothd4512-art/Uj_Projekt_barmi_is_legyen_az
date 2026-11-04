@@ -1,4 +1,4 @@
-import { Check, Download, ExternalLink, Globe, Music, ThumbsUp, Coffee } from 'lucide-react';
+import { Check, Download, Globe, Music, ThumbsUp, Coffee } from 'lucide-react';
 import { BEATIUS } from '../config';
 
 /**
@@ -42,9 +42,6 @@ export default function BeatiusSpotlight() {
         </a>
         <a className="btn ghost" href={BEATIUS.links.kofiProfile} target="_blank" rel="noopener noreferrer">
           <Coffee size={15} /> Ko-fi
-        </a>
-        <a className="beatius-source" href={BEATIUS.links.source} target="_blank" rel="noopener noreferrer">
-          Forráskód <ExternalLink size={12} />
         </a>
       </div>
 

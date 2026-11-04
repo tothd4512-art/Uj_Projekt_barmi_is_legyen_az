@@ -12,6 +12,9 @@ Nem parancssoros építőeszköz: a felületen importálod a projektedet, beáll
 - A fordítás a te gépeden fut, nem színlelt siker.
 - **Az asztali appban nincs reklám.** Hirdetés csak a webes bemutató oldalon van.
 
+> **A forráskód nem publikus termék.** A GitHub repó tárolásra és a kész csomagok
+> kiadására szolgál. Nincs nyílt forrású licenc, minden jog fenntartva.
+
 ## Két csomag, két szerep
 
 | | Asztali app (`src-tauri/`) | Weboldal (`web/`) |
@@ -128,7 +131,7 @@ npm run build    # web/dist — statikus, bárhová deployolható
 Mit tartalmaz:
 - landing oldal a letöltés gombbal,
 - böngészős **demó** (szimulált napló, nem kér és nem tölt fel fájlt),
-- **Alkotások** oldal a profilokkal (BEATIUS, GitHub, Product Hunt, Ko-fi, itch.io),
+- **Alkotások** oldal a profilokkal (BEATIUS termékoldal, itch.io, Product Hunt, Ko-fi),
 - adatvédelmi oldal és hozzájáruló sáv,
 - hirdetés helyek.
 

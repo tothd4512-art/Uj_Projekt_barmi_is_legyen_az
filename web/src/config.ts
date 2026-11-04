@@ -16,9 +16,23 @@ export const BRAND = {
   version: '0.3.0',
 };
 
+/**
+ * A GitHub repo tarolo es csomagkiszolgalo — a forraszkod NEM publikus termek.
+ * Az oldal sehol nem igéri, hogy a kod megtekintheto vagy modositható.
+ */
 export const REPO = 'https://github.com/tothd4512-art/Uj_Projekt_barmi_is_legyen_az';
-export const RELEASES = `${REPO}/releases`;
-export const LATEST_RELEASE = `${REPO}/releases/latest`;
+
+/**
+ * A letöltőgombok célja — EGYETLEN helyen kell átírni.
+ *
+ * FIGYELEM: a GitHub Releases nevtelenul csak PUBLIKUS repo mellett erheto el.
+ * Ha a repót privátra állítod, ez a link 404-et ad, és minden letöltőgomb elhal.
+ *
+ * Teendő akkor: töltsd fel a csomagokat oda, ahol a BEATIUS-t is teríted
+ * (itch.io, „name your own price”), majd írd át ezt az egy sort:
+ *   export const DOWNLOAD_URL = 'https://xd-stoodios.itch.io/creaft';
+ */
+export const DOWNLOAD_URL = `${REPO}/releases/latest`;
 
 /**
  * A készítő másik kész terméke. A weboldalon ez a keresztajánlás alanya.
@@ -52,13 +66,12 @@ export const BEATIUS = {
     kofi: 'https://ko-fi.com/s/5599552726',
     /** Általános támogatás és a többi BEATIUS-változat (PC, Android, iOS). */
     kofiProfile: 'https://ko-fi.com/rust_surfer',
-    source: 'https://github.com/tothdani182-lgtm/BEATIUS-mobile',
   },
   accent: '#a78bfa',
 } as const;
 
 /** Profilok és felületek. Amit üresen hagysz, az „Hamarosan” kártya — nincs halott link. */
-export type ProfileKey = 'beatiusweb' | 'beatius' | 'producthunt' | 'kofi' | 'itchio' | 'github';
+export type ProfileKey = 'beatiusweb' | 'beatius' | 'producthunt' | 'kofi' | 'itchio';
 
 export interface Profile {
   key: ProfileKey;
@@ -123,15 +136,6 @@ export const PROFILES: Profile[] = [
     cta: 'Profil',
     accent: '#f87171',
     note: 'A profil 18+-os korkaput kér a játékok miatt. A BEATIUS fenti linkje közvetlen.',
-  },
-  {
-    key: 'github',
-    name: 'GitHub',
-    label: 'Creaft forráskód',
-    description: 'A Creaft teljes forrása, hibajegyek és a kiadások. Nyíltan, letölthetően.',
-    url: 'https://github.com/tothd4512-art',
-    cta: 'Forráskód',
-    accent: '#38bdf8',
   },
 ];
 

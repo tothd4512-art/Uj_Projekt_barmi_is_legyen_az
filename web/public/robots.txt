@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://creaft-eight.vercel.app/sitemap.xml

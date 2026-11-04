@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  ArrowRight, Ban, Code2, Download, Github, Hammer, Heart,
+  ArrowRight, Ban, Download, EyeOff, Hammer, Heart,
   Monitor, Package, ShieldCheck, Smartphone, Sparkles, WifiOff, Zap,
 } from 'lucide-react';
 import AdSlot from './components/AdSlot';
@@ -8,7 +8,7 @@ import ConsentBar from './components/ConsentBar';
 import Demo from './components/Demo';
 import Profiles from './components/Profiles';
 import BeatiusSpotlight from './components/BeatiusSpotlight';
-import { BRAND, LATEST_RELEASE, REPO, RELEASES, readConsent, writeConsent, type Consent } from './config';
+import { BRAND, DOWNLOAD_URL, readConsent, writeConsent, type Consent } from './config';
 
 type Route = 'home' | 'profiles' | 'privacy';
 
@@ -47,8 +47,7 @@ export default function Site() {
         <nav>
           <a className={route === 'home' ? 'active' : ''} href="#/">Bemutató</a>
           <a className={route === 'profiles' ? 'active' : ''} href="#/profilok">Alkotások</a>
-          <a href={RELEASES} target="_blank" rel="noopener noreferrer">Kiadások</a>
-          <a className="nav-cta" href={LATEST_RELEASE} target="_blank" rel="noopener noreferrer">
+          <a className="nav-cta" href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
             <Download size={15} /> Letöltés
           </a>
         </nav>
@@ -65,7 +64,7 @@ export default function Site() {
                 verzióját, és a saját gépeden készül el az Android APK vagy a Windows EXE.
               </p>
               <div className="hero-actions">
-                <a className="btn primary big" href={LATEST_RELEASE} target="_blank" rel="noopener noreferrer">
+                <a className="btn primary big" href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
                   <Download size={18} /> Letöltés Windowsra
                 </a>
                 <a className="btn ghost big" href="#/profilok">Alkotások <ArrowRight size={16} /></a>
@@ -107,7 +106,7 @@ export default function Site() {
               <Feature Icon={Zap} title="Valódi napló" text="Nem színlelt siker: látod a valódi fordítási kimenetet, a hibával együtt." />
               <Feature Icon={Package} title="Közvetlen fájl" text="Amint kész, menthető. Nincs e-mail, nincs kód, nincs előfizetés." />
               <Feature Icon={ShieldCheck} title="Reklám nélkül" text="Az asztali appban egy szál hirdetés sincs. A hirdetés csak ez a weboldal." />
-              <Feature Icon={Code2} title="Nyílt forrás" text="A teljes kód a GitHubon van, ellenőrizhető és módosítható." />
+              <Feature Icon={EyeOff} title="Nincs telemetria" text="Az app nem küld használati adatokat. A projektjeid a saját gépeden maradnak." />
               <Feature Icon={Heart} title="Támogatható, nem kizárt" text="Ha tetszik, támogathatsz — de a letöltés sosem lesz fizetős kapu mögött." />
             </div>
           </section>
@@ -167,9 +166,13 @@ export default function Site() {
                 jogos, és nem kerüljük meg.
               </Faq>
               <Faq q="Mibe kerül?">
-                A Creaft letöltése és használata ingyenes, a forráskód is nyílt. A támogatás önkéntes,
-                és nem nyit fel semmilyen funkciót. A fenti Ko-fi- és itch.io-linkek a másik appomhoz,
+                A Creaft letöltése és használata ingyenes. A támogatás önkéntes, és nem nyit fel
+                semmilyen funkciót. A fenti Ko-fi- és itch.io-linkek a másik appomhoz,
                 a BEATIUS-hoz vezetnek.
+              </Faq>
+              <Faq q="Nyílt forráskódú?">
+                Nem. A program ingyenes, de a forráskódját nem adom ki. A fordítás ettől függetlenül
+                a te gépeden fut, és a projektjeid nem hagyják el azt.
               </Faq>
             </div>
           </section>
@@ -178,11 +181,8 @@ export default function Site() {
             <h2>Kész vagy? Induljon a Creaft.</h2>
             <p className="muted">Töltsd le, és készítsd el az első csomagodat a saját gépeden.</p>
             <div className="hero-actions center">
-              <a className="btn primary big" href={LATEST_RELEASE} target="_blank" rel="noopener noreferrer">
+              <a className="btn primary big" href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
                 <Download size={18} /> Letöltés
-              </a>
-              <a className="btn ghost big" href={REPO} target="_blank" rel="noopener noreferrer">
-                <Github size={17} /> Forráskód
               </a>
             </div>
           </section>
@@ -231,7 +231,7 @@ export default function Site() {
           </p>
           <h2>Kapcsolat</h2>
           <p>
-            Kérdés vagy hiba esetén a <a href={REPO} target="_blank" rel="noopener noreferrer">GitHub repóban</a> tudsz írni.
+            Kérdés vagy hiba esetén az <a href="#/profilok">Alkotások oldalon</a> találsz elérhetőségeket.
           </p>
           <button className="btn ghost" onClick={() => { writeConsent('denied'); setConsent('denied'); }}>
             Hirdetési hozzájárulás visszavonása
@@ -248,7 +248,7 @@ export default function Site() {
           <div className="footer-links">
             <a href="#/profilok">Alkotások</a>
             <a href="#/adatvedelem">Adatvédelem</a>
-            <a href={REPO} target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">Letöltés</a>
           </div>
         </div>
       </footer>

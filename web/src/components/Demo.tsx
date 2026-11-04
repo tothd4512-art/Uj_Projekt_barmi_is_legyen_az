@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   CheckCircle2, Loader2, Monitor, Play, Smartphone, Square, Terminal, XCircle, AlertTriangle,
 } from 'lucide-react';
-import { LATEST_RELEASE } from '../config';
+import { DOWNLOAD_URL } from '../config';
 
 type Target = 'windows' | 'android';
 type Phase = 'idle' | 'running' | 'done';
@@ -141,7 +141,7 @@ export default function Demo() {
             A böngésző nem készít valódi APK/EXE fájlt — ehhez fordítóeszközök kellenek a gépeden.
             A valódi fájl az asztali Creaft appban készül el, reklám nélkül.
           </p>
-          <a className="btn primary" href={LATEST_RELEASE}>Letöltöm az asztali appot</a>
+          <a className="btn primary" href={DOWNLOAD_URL}>Letöltöm az asztali appot</a>
         </div>
       )}
 
