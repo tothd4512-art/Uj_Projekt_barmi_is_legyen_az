@@ -146,6 +146,7 @@ A szövegek ezt ki is írják, hogy a látogató ne higgye Creaft-launchnak.
 
 | Felület | URL |
 |---|---|
+| BEATIUS termékoldal | https://beatius-offline-music-player-8b2b31.webnode.page/ |
 | BEATIUS letöltés | https://xd-stoodios.itch.io/beatius-maximized |
 | Product Hunt | https://www.producthunt.com/products/beatius |
 | Ko-fi (Maximized) | https://ko-fi.com/s/5599552726 |

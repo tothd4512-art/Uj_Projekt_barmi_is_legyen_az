@@ -47,7 +47,7 @@ a landing oldalon és az Alkotások oldalon is. Ez saját projekt, nem hirdetés
 A három külső felület (Product Hunt, Ko-fi, itch.io) a **BEATIUS**-é, nem a Creafté — a kártyaszövegek
 ezt explicitté teszik. Ha később lesz Creaft-launch, a `PROFILES`-ban külön kártyát kell neki adni.
 
-Az `AdSlot` slotonként más saját ajánlót mutat (hero → BEATIUS, inline → Product Hunt, footer → Ko-fi),
+Az `AdSlot` slotonként más saját ajánlót mutat (hero → BEATIUS termékoldal, inline → Product Hunt, footer → Ko-fi),
 és szándékosan nem ajánlja a 18+-os korkapu mögötti itch.io-profilgyökeret.
 
 ## Deploy

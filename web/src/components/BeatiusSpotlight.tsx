@@ -1,4 +1,4 @@
-import { Check, Download, ExternalLink, Music, ThumbsUp, Coffee } from 'lucide-react';
+import { Check, Download, ExternalLink, Globe, Music, ThumbsUp, Coffee } from 'lucide-react';
 import { BEATIUS } from '../config';
 
 /**
@@ -33,6 +33,9 @@ export default function BeatiusSpotlight() {
       <div className="beatius-actions">
         <a className="btn primary" href={BEATIUS.links.download} target="_blank" rel="noopener noreferrer">
           <Download size={16} /> Letöltés itch.io-ról
+        </a>
+        <a className="btn ghost" href={BEATIUS.links.website} target="_blank" rel="noopener noreferrer">
+          <Globe size={15} /> Weboldal
         </a>
         <a className="btn ghost" href={BEATIUS.links.producthunt} target="_blank" rel="noopener noreferrer">
           <ThumbsUp size={15} /> Product Hunt

@@ -75,10 +75,10 @@ export default function AdSlot({
   // Saját ajánló: slotonként más cél, hogy ne ugyanazt ismételjük háromszor.
   // A korkapus itch.io-profil helyett mindig a közvetlen terméklapra viszünk.
   const order: ProfileKey[] = slot === 'hero'
-    ? ['beatius', 'kofi', 'producthunt']
+    ? ['beatiusweb', 'beatius', 'kofi']
     : slot === 'inline'
-      ? ['producthunt', 'beatius', 'kofi']
-      : ['kofi', 'producthunt', 'beatius'];
+      ? ['producthunt', 'beatiusweb', 'beatius']
+      : ['kofi', 'beatius', 'producthunt'];
   const pick = order
     .map(key => PROFILES.find(p => p.key === key && p.url))
     .find(Boolean);

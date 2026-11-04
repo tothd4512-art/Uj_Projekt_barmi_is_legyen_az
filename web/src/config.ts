@@ -41,9 +41,11 @@ export const BEATIUS = {
     'Offline lejátszás',
     'Billentyűparancsok',
   ],
-  note: 'Nincs előfizetés, nincs reklám, nincs követés — ugyanaz az elv, mint a Creaftnál.',
+  note: 'Az appban nincs előfizetés, nincs reklám és nincs követés — ugyanaz az elv, mint a Creaftnál.',
   links: {
-    /** Elsődleges letöltés: „name your own price”, vagyis 0 Ft is lehet. */
+    /** A készítő saját termékoldala (Webnode). */
+    website: 'https://beatius-offline-music-player-8b2b31.webnode.page/',
+    /** Közvetlen letöltés: „name your own price”, vagyis 0 Ft is lehet. */
     download: 'https://xd-stoodios.itch.io/beatius-maximized',
     producthunt: 'https://www.producthunt.com/products/beatius',
     /** Konkrét shop-termék: a BEATIUS Maximized lapja. */
@@ -56,7 +58,7 @@ export const BEATIUS = {
 } as const;
 
 /** Profilok és felületek. Amit üresen hagysz, az „Hamarosan” kártya — nincs halott link. */
-export type ProfileKey = 'beatius' | 'producthunt' | 'kofi' | 'itchio' | 'github';
+export type ProfileKey = 'beatiusweb' | 'beatius' | 'producthunt' | 'kofi' | 'itchio' | 'github';
 
 export interface Profile {
   key: ProfileKey;
@@ -71,6 +73,16 @@ export interface Profile {
 }
 
 export const PROFILES: Profile[] = [
+  {
+    key: 'beatiusweb',
+    name: 'BEATIUS',
+    label: 'Hivatalos termékoldal',
+    description:
+      'A BEATIUS saját bemutatkozó oldala: képernyőképek, a Maximized újdonságai és a letöltéshez vezető linkek.',
+    url: BEATIUS.links.website,
+    cta: 'Weboldal',
+    accent: BEATIUS.accent,
+  },
   {
     key: 'beatius',
     name: 'BEATIUS Maximized',
