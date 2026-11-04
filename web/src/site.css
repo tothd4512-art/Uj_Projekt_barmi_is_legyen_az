@@ -250,22 +250,31 @@ a.profile-card:hover { transform: translateY(-3px); }
   display: inline-flex; align-items: center; gap: 4px;
   font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #64748b;
 }
-.ad-house { border-style: solid; border-color: color-mix(in srgb, var(--ad-accent) 35%, var(--border)); }
-.ad-house:hover { background: var(--panel); }
-.ad-body { display: flex; align-items: center; gap: 16px; }
-.ad-badge {
-  width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center;
-  background: var(--ad-accent); color: #06121a; font-weight: 800;
+.promo {
+  display: block; position: relative; margin: 8px 0 24px;
+  border: 1px solid color-mix(in srgb, var(--promo-accent) 35%, var(--border));
+  border-radius: 14px; background: var(--bg-2); padding: 24px 18px 16px;
 }
-.ad-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.ad-copy strong { font-size: 1rem; }
-.ad-copy span { color: var(--muted); font-size: .85rem; }
-.ad-cta {
+.promo-label {
+  position: absolute; top: 7px; left: 14px;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #64748b;
+}
+.promo:hover { background: var(--panel); }
+.promo-body { display: flex; align-items: center; gap: 16px; }
+.promo-badge {
+  width: 46px; height: 46px; flex: none; border-radius: 13px; display: grid; place-items: center;
+  background: var(--promo-accent); color: #06121a; font-weight: 800;
+}
+.promo-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.promo-copy strong { font-size: 1rem; }
+.promo-copy span { color: var(--muted); font-size: .85rem; }
+.promo-cta {
   margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 14px; border-radius: 10px; font-size: .85rem; font-weight: 650;
-  background: color-mix(in srgb, var(--ad-accent) 18%, transparent); color: var(--ad-accent);
+  background: color-mix(in srgb, var(--promo-accent) 18%, transparent); color: var(--promo-accent);
 }
-.ad-card { background: var(--panel); }
+.promo-card { background: var(--panel); }
 
 /* consent */
 .consent {
@@ -308,8 +317,8 @@ a.profile-card:hover { transform: translateY(-3px); }
 @media (max-width: 620px) {
   .feature-grid, .steps, .profile-grid, .demo-targets { grid-template-columns: 1fr; }
   .section { padding: 40px 20px; }
-  .ad-body { flex-wrap: wrap; }
-  .ad-cta { margin-left: 0; }
+  .promo-body { flex-wrap: wrap; }
+  .promo-cta { margin-left: 0; }
   .consent-actions { width: 100%; }
   .consent-actions .btn { flex: 1; }
 }

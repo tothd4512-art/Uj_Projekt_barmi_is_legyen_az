@@ -78,20 +78,20 @@ export default function AdSlot({
 
   return (
     <a
-      className={`ad ad-${variant} ad-house`}
+      className={`promo promo-${variant}`}
       href={pick.url}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ ['--ad-accent' as string]: pick.accent }}
+      style={{ ['--promo-accent' as string]: pick.accent }}
     >
-      <span className="ad-label"><Megaphone size={11} /> Saját hirdetés</span>
-      <div className="ad-body">
-        <div className="ad-badge" aria-hidden="true">{pick.name.slice(0, 2).toUpperCase()}</div>
-        <div className="ad-copy">
+      <span className="promo-label"><Megaphone size={11} /> Saját ajánló</span>
+      <div className="promo-body">
+        <div className="promo-badge" aria-hidden="true">{pick.name.slice(0, 2).toUpperCase()}</div>
+        <div className="promo-copy">
           <strong>{pick.name}</strong>
           <span>{pick.description}</span>
         </div>
-        <span className="ad-cta">{pick.cta} <ExternalLink size={14} /></span>
+        <span className="promo-cta">{pick.cta} <ExternalLink size={14} /></span>
       </div>
     </a>
   );
