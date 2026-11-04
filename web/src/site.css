@@ -330,6 +330,9 @@ a.profile-card:hover { transform: translateY(-3px); }
 .consent-text { display: flex; gap: 11px; flex: 1; min-width: 280px; color: var(--muted); font-size: .85rem; }
 .consent-text svg { flex: none; margin-top: 3px; color: var(--accent); }
 .consent-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+/* Alapbol a hosszu szoveg latszik; mobilon a tomor valtozatra valtunk. */
+.consent-short { display: none; }
+.consent-text a { color: var(--accent); text-decoration: underline; }
 
 /* prose */
 .prose { max-width: 760px; }
@@ -362,6 +365,12 @@ a.profile-card:hover { transform: translateY(-3px); }
   .section { padding: 40px 20px; }
   .promo-body { flex-wrap: wrap; }
   .promo-cta { margin-left: 0; }
-  .consent-actions { width: 100%; }
-  .consent-actions .btn { flex: 1; }
+  .consent { padding: 10px 14px; }
+  .consent-inner { gap: 10px; }
+  .consent-text { font-size: .78rem; min-width: 0; gap: 8px; }
+  .consent-text svg { width: 15px; height: 15px; }
+  .consent-long { display: none; }
+  .consent-short { display: inline; }
+  .consent-actions { width: 100%; gap: 8px; }
+  .consent-actions .btn { flex: 1; justify-content: center; padding: 9px 10px; font-size: .82rem; }
 }
