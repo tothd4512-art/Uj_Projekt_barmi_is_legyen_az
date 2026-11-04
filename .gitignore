@@ -4,8 +4,12 @@ release/
 data/
 *.log
 .env
+.env.local
 .DS_Store
 *.tsbuildinfo
 src-tauri/target/
 src-tauri/gen/schemas/
 scripts/build-runner.mjs
+web/dist/
+web/node_modules/
+.vercel/

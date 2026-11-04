@@ -4,7 +4,7 @@ import path from 'node:path';
 export class Store {
   constructor(dataDir) {
     this.dataDir = dataDir;
-    this.file = path.join(dataDir, 'buildmuhely.json');
+    this.file = path.join(dataDir, 'creaft.json');
     this.state = { projects: [], jobs: [], artifacts: [] };
     this.saveQueue = Promise.resolve();
   }

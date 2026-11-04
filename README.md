@@ -1,8 +1,8 @@
-# BuildMűhely
+# Creaft
 
-Grafikus, helyi alkalmazás webes projektek **Android APK** és **Windows EXE** csomagolására.
+**Creative + Craft.** Grafikus, helyi alkalmazás webes projektek **Android APK** és **Windows EXE** csomagolására.
 
-A asztali app **Tauri 2** héjat használ: a felület React, az ablakot és a helyi parancsokat Rust kezeli. A buildmotor továbbra is Node.js-alapú, mert az APK/EXE csomagolás npm/Gradle/Electron-builder eszközöket futtat.
+Az asztali app **Tauri 2** héjat használ: a felület React, az ablakot és a helyi parancsokat Rust kezeli. A buildmotor továbbra is Node.js-alapú, mert az APK/EXE csomagolás npm/Gradle/Electron-builder eszközöket futtat.
 
 Nem parancssoros építőeszköz: a felületen importálod a projektedet, beállítod a nevét/azonosítóját/verzióját, kiválasztod a célt, és követed a valódi fordítási naplót. A kész fájl közvetlenül menthető.
 
@@ -10,6 +10,20 @@ Nem parancssoros építőeszköz: a felületen importálod a projektedet, beáll
 - Nincs e-mailes várólista.
 - Nincs előfizetés a letöltéshez.
 - A fordítás a te gépeden fut, nem színlelt siker.
+- **Az asztali appban nincs reklám.** Hirdetés csak a webes bemutató oldalon van.
+
+## Két csomag, két szerep
+
+| | Asztali app (`src-tauri/`) | Weboldal (`web/`) |
+|---|---|---|
+| Cél | Valódi APK/EXE készítés | Bemutató, demó, letöltés, profilok |
+| Hol fut | A felhasználó gépén | Böngészőben, statikus hostingon |
+| Feltöltés | nincs, helyi fájlrendszer | nincs, a demó szimulált |
+| Reklám | **soha** | saját hirdetés + opcionális AdSense |
+| Fiók | nem kell | nem kell |
+
+A weboldal nem fordít: a böngészőben nincs Gradle/Electron-builder. A demó megmutatja a folyamatot,
+a valódi fájlért az asztali appot kell letölteni.
 
 ## Mit épít?
 
@@ -99,3 +113,35 @@ Csak olyan projektet fordíts, amelyben megbízol. A build folyamat helyi fordí
 ## Aláírás
 
 Az első változat debug APK-t és hordozható EXE-t készít. Play Store feltöltéshez release aláírás, Windows SmartScreen elkerüléséhez pedig kódaláíró tanúsítvány kellhet. Ezeket nem kerüljük meg és nem ígérjük ingyen.
+
+## Webes verzió (`web/`)
+
+A nyilvános bemutató oldal külön csomag, hogy a hirdetés véletlenül se kerülhessen be az asztali appba.
+
+```bash
+cd web
+npm install
+npm run dev      # http://localhost:5174
+npm run build    # web/dist — statikus, bárhová deployolható
+```
+
+Mit tartalmaz:
+- landing oldal a letöltés gombbal,
+- böngészős **demó** (szimulált napló, nem kér és nem tölt fel fájlt),
+- **Alkotások** oldal a profilokkal (BEATIUS, GitHub, Product Hunt, Ko-fi, itch.io),
+- adatvédelmi oldal és hozzájáruló sáv,
+- hirdetés helyek.
+
+### Hirdetés
+
+Alapból **saját hirdetés** fut: a saját projektek kártyája, külső hirdetőhálózat és tracker nélkül.
+AdSense csak akkor tölt be, ha a `VITE_ADSENSE_CLIENT` + `VITE_ADSENSE_SLOT_*` változók ki vannak
+töltve **és** a látogató hozzájárult. A részletek: [`web/README.md`](web/README.md).
+
+A profil linkeket a `web/src/config.ts` fájlban lehet átírni. Amelyiknek üres az `url` mezője,
+az „Hamarosan” kártyaként jelenik meg, nem halott linkként.
+
+### Deploy Vercelre
+
+A `web/vercel.json` kész: build parancs, kimeneti könyvtár, SPA rewrite és cache fejlécek.
+A Vercel projektben a **Root Directory** legyen `web`.

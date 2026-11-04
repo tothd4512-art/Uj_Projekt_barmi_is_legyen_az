@@ -17,12 +17,12 @@ jobs:
           - name: Windows EXE
             os: windows-latest
             bundles: nsis
-            artifact: BuildMuhely-Windows
+            artifact: Creaft-Windows
             path: src-tauri/target/release/bundle/nsis/*.exe
           - name: Linux AppImage
             os: ubuntu-24.04
             bundles: appimage
-            artifact: BuildMuhely-Linux
+            artifact: Creaft-Linux
             path: src-tauri/target/release/bundle/appimage/*.AppImage
 
     steps:
@@ -92,18 +92,18 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
-          pattern: BuildMuhely-*
+          pattern: Creaft-*
 
       - name: Release közzététele
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          TAG="v0.2.0-tauri-${{ github.run_number }}"
-          TITLE="BuildMűhely 0.2.0 (Tauri) – build ${{ github.run_number }}"
+          TAG="v0.3.0-creaft-${{ github.run_number }}"
+          TITLE="Creaft 0.3.0 – build ${{ github.run_number }}"
           NOTES="Tauri 2 asztali héj. Windows: NSIS telepítő (.exe). Linux: AppImage. A csomagok aláírás nélküliek, a rendszer figyelmeztetést jeleníthet meg."
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" artifacts/BuildMuhely-Windows/* artifacts/BuildMuhely-Linux/* --clobber
+            gh release upload "$TAG" artifacts/Creaft-Windows/* artifacts/Creaft-Linux/* --clobber
           else
-            gh release create "$TAG" artifacts/BuildMuhely-Windows/* artifacts/BuildMuhely-Linux/* --title "$TITLE" --notes "$NOTES" --prerelease
+            gh release create "$TAG" artifacts/Creaft-Windows/* artifacts/Creaft-Linux/* --title "$TITLE" --notes "$NOTES" --prerelease
           fi

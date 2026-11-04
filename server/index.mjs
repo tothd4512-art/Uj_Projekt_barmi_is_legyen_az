@@ -54,8 +54,8 @@ export async function startServer(options = {}) {
     await fs.cp(sampleProjectDir(), sourcePath, { recursive: true });
     await store.addProject({
       id,
-      name: 'Hello BuildMűhely',
-      appId: 'hu.buildmuhely.hello',
+      name: 'Hello Creaft',
+      appId: 'hu.creaft.hello',
       version: '1.0.0',
       description: 'Mintaprojekt, amin kipróbálhatod a fordítást.',
       sourcePath,
@@ -75,7 +75,7 @@ export async function startServer(options = {}) {
     next();
   }
 
-  app.get('/api/health', (_req, res) => res.json({ ok: true, app: 'BuildMűhely', demoMode }));
+  app.get('/api/health', (_req, res) => res.json({ ok: true, app: 'Creaft', demoMode }));
   app.get('/api/environment', async (_req, res) => res.json(await checkEnvironment()));
   app.get('/api/projects', (_req, res) => res.json(store.projects));
 
@@ -87,7 +87,7 @@ export async function startServer(options = {}) {
     const project = await store.addProject({
       id,
       name: 'Új mintaprojekt',
-      appId: `hu.buildmuhely.sample${Date.now().toString(36)}`,
+      appId: `hu.creaft.sample${Date.now().toString(36)}`,
       version: '1.0.0',
       description: '',
       sourcePath,
@@ -128,7 +128,7 @@ export async function startServer(options = {}) {
       const sourcePath = path.join(projectDir, 'source');
       await fs.rename(webRoot, sourcePath);
       const name = String(req.body.name || path.basename(req.file.originalname, '.zip')).slice(0, 120);
-      const appId = req.body.appId || `hu.buildmuhely.${id.slice(0, 8)}`;
+      const appId = req.body.appId || `hu.creaft.${id.slice(0, 8)}`;
       if (!isValidAppId(appId)) throw new Error('Érvénytelen csomagazonosító (pl. hu.cegnev.app).');
       const project = await store.addProject({
         id,
@@ -272,7 +272,7 @@ export async function startServer(options = {}) {
     app.use(express.static(dist));
     app.get('*', (_req, res) => res.sendFile(path.join(dist, 'index.html')));
   } catch {
-    app.get('/', (_req, res) => res.send('BuildMűhely API fut. A felülethez indítsd a Vite dev szervert vagy készíts buildet.'));
+    app.get('/', (_req, res) => res.send('Creaft API fut. A felülethez indítsd a Vite dev szervert vagy készíts buildet.'));
   }
 
   const server = app.listen(requestedPort, host);
@@ -282,7 +282,7 @@ export async function startServer(options = {}) {
   });
   const address = server.address();
   const port = typeof address === 'object' && address ? address.port : requestedPort;
-  console.log(`BuildMűhely szerver: http://${host}:${port}${demoMode ? ' (előnézeti mód)' : ''}`);
+  console.log(`Creaft szerver: http://${host}:${port}${demoMode ? ' (előnézeti mód)' : ''}`);
 
   return {
     server,

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "BuildMűhely",
-  "version": "0.2.0",
-  "identifier": "hu.buildmuhely.app",
+  "productName": "Creaft",
+  "version": "0.3.0",
+  "identifier": "hu.creaft.app",
   "build": {
     "beforeDevCommand": "npm run build:runner && npm run vite:dev",
     "devUrl": "http://localhost:5173",
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "BuildMűhely",
+        "title": "Creaft",
         "width": 1280,
         "height": 860,
         "minWidth": 960,

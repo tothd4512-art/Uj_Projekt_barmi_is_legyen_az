@@ -74,7 +74,7 @@ struct Store {
 impl Store {
     fn load(data_dir: &Path) -> Result<Self, String> {
         fs::create_dir_all(data_dir).map_err(err)?;
-        let file = data_dir.join("buildmuhely.json");
+        let file = data_dir.join("creaft.json");
         let data = if file.exists() {
             let raw = fs::read_to_string(&file).map_err(err)?;
             serde_json::from_str(&raw).unwrap_or_default()
@@ -201,8 +201,8 @@ fn ensure_sample_project(state: &AppState) -> Result<(), String> {
     .map_err(err)?;
     store.data.projects.push(Project {
         id,
-        name: "Hello BuildMűhely".into(),
-        app_id: "hu.buildmuhely.hello".into(),
+        name: "Hello Creaft".into(),
+        app_id: "hu.creaft.hello".into(),
         version: "1.0.0".into(),
         description: "Mintaprojekt, amin kipróbálhatod a fordítást.".into(),
         source_path: source.to_string_lossy().to_string(),
@@ -250,7 +250,7 @@ fn kill_process(pid: u32) {
 
 #[tauri::command]
 fn health() -> Value {
-    json!({ "ok": true, "app": "BuildMűhely", "demoMode": false, "runtime": "tauri" })
+    json!({ "ok": true, "app": "Creaft", "demoMode": false, "runtime": "tauri" })
 }
 
 #[tauri::command]
@@ -298,7 +298,7 @@ fn create_sample_project(state: State<Arc<AppState>>) -> Result<Project, String>
     let project = Project {
         id,
         name: "Új mintaprojekt".into(),
-        app_id: format!("hu.buildmuhely.sample{}", Utc::now().timestamp_millis()),
+        app_id: format!("hu.creaft.sample{}", Utc::now().timestamp_millis()),
         version: "1.0.0".into(),
         description: String::new(),
         source_path: source.to_string_lossy().to_string(),
@@ -381,7 +381,7 @@ fn import_project_zip(state: State<Arc<AppState>>, path: String) -> Result<Proje
     let project = Project {
         id: id.clone(),
         name: name.chars().take(120).collect(),
-        app_id: format!("hu.buildmuhely.{}", &id[..8]),
+        app_id: format!("hu.creaft.{}", &id[..8]),
         version: "1.0.0".into(),
         description: String::new(),
         source_path: source.to_string_lossy().to_string(),
@@ -758,7 +758,7 @@ mod tests {
 
     #[test]
     fn app_id_validation() {
-        assert!(is_valid_app_id("hu.buildmuhely.app"));
+        assert!(is_valid_app_id("hu.creaft.app"));
         assert!(is_valid_app_id("com.example.my_app"));
         assert!(!is_valid_app_id("app"));
         assert!(!is_valid_app_id("hu..app"));
@@ -799,7 +799,7 @@ fn main() {
                 .path()
                 .app_data_dir()
                 .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e.to_string()))?
-                .join("BuildMuhely");
+                .join("Creaft");
             let state = Arc::new(
                 AppState::new(data_dir)
                     .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?,
@@ -825,5 +825,5 @@ fn main() {
             cancel_build
         ])
         .run(tauri::generate_context!())
-        .expect("Hiba a BuildMűhely indításakor");
+        .expect("Hiba a Creaft indításakor");
 }

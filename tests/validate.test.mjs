@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isValidAppId, isValidVersion, sanitizeFileName, isSafeZipEntry } from '../server/validate.mjs';
 
 test('appId accepts reverse-domain identifiers', () => {
-  assert.equal(isValidAppId('hu.buildmuhely.app'), true);
+  assert.equal(isValidAppId('hu.creaft.app'), true);
   assert.equal(isValidAppId('com.example.my_app'), true);
 });
 

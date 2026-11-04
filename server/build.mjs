@@ -103,7 +103,7 @@ export async function buildWindows(project, workspace, onLog) {
     version: project.version || '1.0.0',
     description: project.description || project.name,
     main: 'main.cjs',
-    author: 'BuildMűhely',
+    author: 'Creaft',
     license: 'MIT',
     devDependencies: {
       electron: '^33.3.1',

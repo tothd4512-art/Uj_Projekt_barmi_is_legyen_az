@@ -193,8 +193,8 @@ export default function App() {
         <div className="brand">
           <div className="brand-icon"><Hammer size={22} /></div>
           <div>
-            <div className="brand-name">BuildMűhely</div>
-            <div className="brand-sub">APK · EXE · helyben</div>
+            <div className="brand-name">Creaft</div>
+            <div className="brand-sub">Creative + Craft</div>
           </div>
         </div>
         <nav>
@@ -213,6 +213,7 @@ export default function App() {
           </button>
         </nav>
         <div className="sidebar-footer">
+          <div className="pill"><span className="dot ok" /> Reklámmentes</div>
           <div className="pill"><span className="dot ok" /> Nincs fiók</div>
           <div className="pill"><span className="dot ok" /> Nincs előfizetés</div>
           <div className="pill"><span className="dot ok" /> Közvetlen letöltés</div>

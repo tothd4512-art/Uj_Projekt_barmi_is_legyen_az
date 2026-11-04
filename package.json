@@ -1,7 +1,7 @@
 {
-  "name": "build-muhely",
-  "version": "0.2.0",
-  "description": "Grafikus, helyi APK- és EXE-készítő műhely Tauri héjjal — fiók, várólista és fizetős letöltés nélkül.",
+  "name": "creaft",
+  "version": "0.3.0",
+  "description": "Creaft — grafikus, helyi APK- és EXE-készítő asztali app, reklámmentesen. Creative + Craft.",
   "private": true,
   "type": "module",
   "scripts": {
